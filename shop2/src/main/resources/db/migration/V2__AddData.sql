@@ -11,3 +11,5 @@ values (1, 'Beer', 80), (2, 'Milk', 60), (3, 'Train', 280), (4, 'Apple', 79), (5
 
 insert into products_categories (product_id,category_id)
 values (1,2),(2,2),(3,3),(4,1),(5,1);
+
+insert into product_seq(next_val) values (6);
