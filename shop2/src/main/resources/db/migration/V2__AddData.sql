@@ -13,3 +13,5 @@ insert into products_categories (product_id,category_id)
 values (1,2),(2,2),(3,3),(4,1),(5,1);
 
 insert into product_seq(next_val) values (6);
+insert into categories_seq(next_val) values (4);
+insert into user_seq(next_val) values (4);
