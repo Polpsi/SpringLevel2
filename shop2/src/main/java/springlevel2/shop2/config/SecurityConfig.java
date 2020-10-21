@@ -14,14 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import springlevel2.shop2.domain.Role;
 import springlevel2.shop2.service.UserService;
 
-//Долго бился с тем, что идея не видит подгруженного из мавена lombok (аннотации все видит
-// но в UserServiceImpl не резолвил builder и геттеры из Dto), хотя все библиотеки были в наличии.
-//Решилось только принудельной подзагрузкой плагина в Идею.
-
-//Как проверять несколько ролей на ресурс - понятно, а как проверять несколько ролей одного пользователя?
-//Напрашивается создание дополнительной таблицы ManyToMany user_id,role_Name
-//Как их вытягивать в секьюрити ?
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
