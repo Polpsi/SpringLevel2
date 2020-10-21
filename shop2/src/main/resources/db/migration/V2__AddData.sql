@@ -12,6 +12,8 @@ values (1, 'Beer', 80), (2, 'Milk', 60), (3, 'Train', 280), (4, 'Apple', 79), (5
 insert into products_categories (product_id,category_id)
 values (1,2),(2,2),(3,3),(4,1),(5,1);
 
-insert into product_seq(next_val) values (6);
-insert into categories_seq(next_val) values (4);
-insert into user_seq(next_val) values (4);
+SET SQL_SAFE_UPDATES=0;
+UPDATE product_seq SET next_val=6 WHERE next_val=1;
+UPDATE category_seq SET next_val=4 WHERE next_val=1;
+UPDATE user_seq SET next_val=4 WHERE next_val=1;
+SET SQL_SAFE_UPDATES=1;

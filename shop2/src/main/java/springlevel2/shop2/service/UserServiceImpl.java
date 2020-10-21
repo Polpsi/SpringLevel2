@@ -11,11 +11,11 @@ import springlevel2.shop2.domain.Role;
 import springlevel2.shop2.domain.User;
 import springlevel2.shop2.dto.UserDto;
 
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -41,8 +41,46 @@ public class UserServiceImpl implements UserService {
                 .role(Role.CLIENT)
                 .build();
         userRepository.save(user);
-
         return true;
+    }
+
+    @Override
+    public List<UserDto> getAll() {
+        return userRepository.findAll().stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public User findByName(String name) {
+        return userRepository.findFirstByName(name);
+    }
+
+    @Override
+    @Transactional
+    public void updateProfile(UserDto dto) {
+        User savedUser = userRepository.findFirstByName(dto.getUsername());
+        if(savedUser == null){
+            throw new RuntimeException("User not found by name " + dto.getUsername());
+        }
+
+        boolean changed = false;
+        if(dto.getPassword() != null && !dto.getPassword().isEmpty()){
+            savedUser.setPassword(passwordEncoder.encode(dto.getPassword()));
+            changed = true;
+        }
+        if(!Objects.equals(dto.getEmail(), savedUser.getEmail())){
+            savedUser.setEmail(dto.getEmail());
+            changed = true;
+        }
+        if(changed){
+            userRepository.save(savedUser);
+        }
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
     }
 
     @Override
@@ -61,4 +99,11 @@ public class UserServiceImpl implements UserService {
                 roles);
     }
 
+
+    private UserDto toDto(User user){
+        return UserDto.builder()
+                .username(user.getName())
+                .email(user.getEmail())
+                .build();
+    }
 }
