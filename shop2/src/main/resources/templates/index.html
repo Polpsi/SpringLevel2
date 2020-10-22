@@ -15,11 +15,10 @@
 <div class="random_news"></div>
 <a href="#" onclick="get_news()">Another news</a>
 <script>
+    get_news(); //Чтобы при загрузке сразу получить новость.
     function get_news() {
-        alert("befor");
     $.getJSON('http://localhost:8080/news/js', function(data) {
-        alert('wefl');
-        $('.random_news').text(data);
+        $('.random_news').text(data.response);
     })};
 </script>
 </body>

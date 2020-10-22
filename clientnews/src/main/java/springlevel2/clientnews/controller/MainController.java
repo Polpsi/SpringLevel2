@@ -32,12 +32,9 @@ public class MainController {
         return "random";
     }
 
- //   @GetMapping("/js")
-
     @RequestMapping(value = "/js", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map jsRandomNews() {
-        System.out.println("jsreq");
         return Collections.singletonMap("response",mainService.getRandomNews());
     }
 }
