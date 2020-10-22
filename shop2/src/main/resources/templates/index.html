@@ -3,11 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="/webjars/jquery/jquery.min.js"></script>
 </head>
 <body>
 <div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
 <h2>Amount clicks -> <b th:text="${amountClicks}"> 10 </b></h2>
 <h2>Your UUID -> <b th:text="${uuid}"> 10 </b></h2>
+
+<h3>Random news</h3>
+<div class="random_news"></div>
+<a href="#" onclick="get_news()">Another news</a>
+<script>
+    function get_news() {
+        alert("befor");
+    $.getJSON('http://localhost:8080/news/js', function(data) {
+        alert('wefl');
+        $('.random_news').text(data);
+    })};
+</script>
 </body>
 </html>

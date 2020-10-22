@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: cloudrouter
+  cloud:
+    config:
+      uri: http://localhost:8888
